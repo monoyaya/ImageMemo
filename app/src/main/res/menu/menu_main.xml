@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.jackg.programmers.challenges.imagememo.MainActivity">
+    <item
+        android:id="@+id/memoListFragment"
+        android:title="@string/action_memoList"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/memoWriteFragment"
+        android:title="@string/action_write"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/memoDetailFragment"
+        android:title="@string/action_memoDetail"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/memoModifyFragment"
+        android:title="@string/action_modify"
+        app:showAsAction="never"/>
+</menu>

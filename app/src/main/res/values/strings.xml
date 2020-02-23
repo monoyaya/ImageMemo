@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">메모장</string>
+    <string name="action_write">메모하기</string>
+    <string name="memo_img_view_descript">memo img</string>
+
+    <string name="no_memo_show_txt">작성된 메모가 없습니다.</string>
+    <string name="action_memoList">목록</string>
+    <string name="action_memoDetail">상세화면</string>
+    <string name="action_modify">수정하기</string>
+    <string name="toolbar_title">메모장</string>
+    <string name="text_hint_subject">제목</string>
+    <string name="text_hint_content">메모 내용</string>
+    <string name="bnt_txt_write">작성</string>
+    <string name="bnt_txt_back">이전</string>
+    <string name="bnt_txt_add_img">사진 추가</string>
+    <string name="date_time_pattern">yyyy년 MM월 dd일 HH시 mm분 ss초</string>
+    <string name="memo_write_fail_msg">다시 작성해 주세요.</string>
+    <string name="bnt_txt_delete">삭제</string>
+    <string name="bnt_txt_list">목록</string>
+    <string name="bnt_txt_modify">수정</string>
+    <string name="tvDetailDate_prefix">작성일자 :</string>
+</resources>

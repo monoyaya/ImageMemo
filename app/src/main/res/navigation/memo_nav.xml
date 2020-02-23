@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/memo_navigation"
+    app:startDestination="@id/memoListFragment">
+
+    <fragment
+        android:id="@+id/memoListFragment"
+        android:name="com.jackg.programmers.challenges.imagememo.ui.MemoListFragment"
+        android:label="memo_list_fragment"
+        tools:layout="@layout/memo_list_fragment" >
+        <action
+            android:id="@+id/action_memoListFragment_to_memoWriteFragment"
+            app:destination="@id/memoWriteFragment" />
+        <action
+            android:id="@+id/action_memoListFragment_to_memoDetailFragment"
+            app:destination="@id/memoDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memoWriteFragment"
+        android:name="com.jackg.programmers.challenges.imagememo.ui.MemoWriteFragment"
+        android:label="fragment_memo_write"
+        tools:layout="@layout/fragment_memo_write" >
+        <action
+            android:id="@+id/action_memoWriteFragment_to_memoDetailFragment"
+            app:destination="@id/memoDetailFragment"
+            app:popUpTo="@+id/memoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memoDetailFragment"
+        android:name="com.jackg.programmers.challenges.imagememo.ui.MemoDetailFragment"
+        android:label="fragment_memo_detail"
+        tools:layout="@layout/fragment_memo_detail" >
+        <action
+            android:id="@+id/action_memoDetailFragment_to_memoModifyFragment"
+            app:destination="@id/memoModifyFragment" />
+        <argument
+            android:name="memoId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+    <fragment
+        android:id="@+id/memoModifyFragment"
+        android:name="com.jackg.programmers.challenges.imagememo.ui.MemoModifyFragment"
+        android:label="fragment_memo_modify"
+        tools:layout="@layout/fragment_memo_modify" >
+        <argument
+            android:name="memoId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+</navigation>
