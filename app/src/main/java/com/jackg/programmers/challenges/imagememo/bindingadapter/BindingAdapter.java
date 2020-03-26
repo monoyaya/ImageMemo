@@ -5,12 +5,12 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.jackg.programmers.challenges.imagememo.R;
 import com.jackg.programmers.challenges.imagememo.data.MemoEntity;
 import com.jackg.programmers.challenges.imagememo.rvutil.CustomAdapter;
 import com.jackg.programmers.challenges.imagememo.util.IvLongClickListener;
@@ -20,7 +20,7 @@ import java.util.List;
 public class BindingAdapter {
 
     @androidx.databinding.BindingAdapter("items")
-    public static void items (RecyclerView rv, List<MemoEntity> list) {
+    public static void items(RecyclerView rv, List<MemoEntity> list) {
         CustomAdapter adapter = (CustomAdapter) rv.getAdapter();
         if (adapter != null) {
             adapter.setItems(list);
@@ -33,15 +33,16 @@ public class BindingAdapter {
         if (items.isEmpty() || items.size() == 0) {
             iv.setVisibility(View.GONE);
         } else {
-            for (String url : items){
+            for (String url : items) {
                 if (url.isEmpty()) {
                     iv.setVisibility(View.GONE);
                     break;
                 } else iv.setVisibility(View.VISIBLE);
+
                 float density = iv.getContext().getResources().getDisplayMetrics().density;
                 int dp60 = Math.round(60 * density);
 
-                Glide.with(iv.getContext()).load(url).override(dp60, dp60).circleCrop().into(iv);
+                Glide.with(iv.getContext()).load(url).override(dp60, dp60).circleCrop().error(R.mipmap.ic_launcher).into(iv);
                 break;
             }
         }
@@ -77,7 +78,7 @@ public class BindingAdapter {
             }
 
             if (group.getMeasuredHeight() > (30 * dp10)) {
-                NestedScrollView.LayoutParams params = (NestedScrollView.LayoutParams) container.getLayoutParams();
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) container.getLayoutParams();
                 params.height = 30 * dp10;
                 container.setLayoutParams(params);
             }
@@ -87,10 +88,10 @@ public class BindingAdapter {
     @androidx.databinding.BindingAdapter("setModifyIv")
     public static void setModifyIv(LinearLayout layout, List<String> imgList) {
         if (imgList == null || imgList.size() < 1) {
-            ((HorizontalScrollView)layout.getParent()).setVisibility(View.GONE);
+            ((HorizontalScrollView) layout.getParent()).setVisibility(View.GONE);
             return;
         } else {
-            ((HorizontalScrollView)layout.getParent()).setVisibility(View.VISIBLE);
+            ((HorizontalScrollView) layout.getParent()).setVisibility(View.VISIBLE);
         }
 
         float density = layout.getContext().getResources().getDisplayMetrics().density;

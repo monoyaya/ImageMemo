@@ -1,6 +1,5 @@
 package com.jackg.programmers.challenges.imagememo.rvutil;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +20,9 @@ import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
 
-    private Activity activity;
     private ArrayList<MemoEntity> items;
 
-    public CustomAdapter(Activity activity) {
-        this.activity = activity;
+    public CustomAdapter() {
     }
 
     @NonNull

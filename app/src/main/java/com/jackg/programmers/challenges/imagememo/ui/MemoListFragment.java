@@ -10,19 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jackg.programmers.challenges.imagememo.R;
-import com.jackg.programmers.challenges.imagememo.data.MemoEntity;
 import com.jackg.programmers.challenges.imagememo.databinding.MemoListFragmentBinding;
 import com.jackg.programmers.challenges.imagememo.rvutil.CustomAdapter;
 import com.jackg.programmers.challenges.imagememo.viewmodel.MemoViewModel;
-
-import java.util.List;
 
 public class MemoListFragment extends Fragment {
 
@@ -58,20 +54,17 @@ public class MemoListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(requireActivity()).get(MemoViewModel.class);
 
-        CustomAdapter adapter = new CustomAdapter(requireActivity());
+        CustomAdapter adapter = new CustomAdapter();
         rv.setAdapter(adapter);
 
-        mViewModel.getData().observe(requireActivity(), new Observer<List<MemoEntity>>() {
-            @Override
-            public void onChanged(List<MemoEntity> entities) {
-                if (entities.size() > 0) {
-                    noDataShowLayout.setVisibility(View.GONE);
-                    rv.setVisibility(View.VISIBLE);
-                    binding.setMemoList(entities);
-                } else {
-                    noDataShowLayout.setVisibility(View.VISIBLE);
-                    rv.setVisibility(View.GONE);
-                }
+        mViewModel.getData().observe(requireActivity(), entities -> {
+            if (entities.size() > 0) {
+                noDataShowLayout.setVisibility(View.GONE);
+                rv.setVisibility(View.VISIBLE);
+                binding.setMemoList(entities);
+            } else {
+                noDataShowLayout.setVisibility(View.VISIBLE);
+                rv.setVisibility(View.GONE);
             }
         });
 
