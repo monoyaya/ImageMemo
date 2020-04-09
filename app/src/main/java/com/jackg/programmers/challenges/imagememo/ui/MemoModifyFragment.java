@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.URLUtil;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -90,17 +89,17 @@ public class MemoModifyFragment extends Fragment implements View.OnClickListener
 
         hasCamera = requireContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_ANY);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(MemoViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MemoViewModel.class);
 
         if (memoId > 0L) {
             viewModel.getMemo(memoId).observe(requireActivity(), entity -> {
-                imgList = (ArrayList<String>) entity.getImgUrl();
-                binding.setEntity(entity);
-                binding.executePendingBindings();
+                if (entity != null) {
+                    imgList = (ArrayList<String>) entity.getImgUrl();
+                    binding.setEntity(entity);
+                    binding.executePendingBindings();
+                }
             });
         }
-
-        if (imgList != null) setImageView();
     }
 
     @Override
@@ -141,9 +140,12 @@ public class MemoModifyFragment extends Fragment implements View.OnClickListener
         String dateTime = new SimpleDateFormat(pattern, Locale.KOREA).format(new Date());
 
         for (int i = 0; i < layout.getChildCount(); i++) {
-            CheckableIV iv = (CheckableIV) layout.getChildAt(i);
+            CheckableIV iv = null;
 
-            if (!iv.isChecked()) {
+            if (layout.getChildAt(i) instanceof CheckableIV)
+                iv = (CheckableIV) layout.getChildAt(i);
+
+            if (iv != null && !iv.isChecked()) {
                 imgList.remove(iv.getTag());
             }
         }
@@ -270,21 +272,21 @@ public class MemoModifyFragment extends Fragment implements View.OnClickListener
         if (layout.getChildCount() > 0) layout.removeAllViews();
 
         if (imgList.size() < 1) {
-            ((HorizontalScrollView) layout.getParent()).setVisibility(View.GONE);
-            return;
+            binding.imgScrollContainer.setVisibility(View.GONE);
         } else {
-            ((HorizontalScrollView) layout.getParent()).setVisibility(View.VISIBLE);
-        }
+            binding.imgScrollContainer.setVisibility(View.VISIBLE);
 
-        for (String url : imgList) {
-            CheckableIV iv = new CheckableIV(requireContext());
+            for (String url : imgList) {
+                CheckableIV iv = new CheckableIV(requireContext());
 
-            iv.setTag(url);
-            iv.setOnLongClickListener(new IvLongClickListener(imgList));
+                Glide.with(requireContext()).load(url).circleCrop().error(R.mipmap.ic_launcher).into(iv);
 
-            layout.addView(iv);
+                iv.setTag(url);
+                iv.setChecked(true);
+                iv.setOnLongClickListener(new IvLongClickListener(imgList));
 
-            Glide.with(requireContext()).load(url).circleCrop().error(R.mipmap.ic_launcher).into(iv);
+                layout.addView(iv);
+            }
         }
     }
 }

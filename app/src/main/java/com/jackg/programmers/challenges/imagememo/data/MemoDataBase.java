@@ -16,6 +16,7 @@ import java.util.concurrent.Executors;
 public abstract class MemoDataBase extends RoomDatabase {
 
     static final String DB_NAME = "memo_db";
+
     abstract MemoDAO memoDAO();
 
     private static volatile MemoDataBase INSTANCE;
@@ -28,9 +29,9 @@ public abstract class MemoDataBase extends RoomDatabase {
             synchronized (MemoDataBase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                                    MemoDataBase.class,
-                                                    DB_NAME)
-                                    .build();
+                            MemoDataBase.class,
+                            DB_NAME)
+                            .build();
                 }
             }
         }

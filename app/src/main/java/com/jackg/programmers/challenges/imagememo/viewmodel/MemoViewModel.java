@@ -33,19 +33,19 @@ public class MemoViewModel extends AndroidViewModel {
         return mEntity;
     }
 
-    public long insertItem(MemoEntity entity){
+    public long insertItem(MemoEntity entity) {
         return mRepo.insert(entity);
     }
 
-    public void insertItems(List<MemoEntity> entities){
+    public void insertItems(List<MemoEntity> entities) {
         mRepo.insertAll(entities);
     }
 
-    public void updateItem(MemoEntity entity){
+    public void updateItem(MemoEntity entity) {
         mRepo.update(entity);
     }
 
-    public void deleteItem(MemoEntity entity){
+    public void deleteItem(MemoEntity entity) {
         mRepo.delete(entity);
     }
 }

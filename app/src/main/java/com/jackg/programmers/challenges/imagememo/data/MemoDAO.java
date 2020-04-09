@@ -40,7 +40,8 @@ public interface MemoDAO {
 
         @TypeConverter
         public static List<String> fromString(String src) {
-            Type listType = new TypeToken<List<String>>(){}.getType();
+            Type listType = new TypeToken<List<String>>() {
+            }.getType();
 
             return new Gson().fromJson(src, listType);
         }

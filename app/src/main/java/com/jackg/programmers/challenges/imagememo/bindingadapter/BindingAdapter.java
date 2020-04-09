@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.jackg.programmers.challenges.imagememo.R;
 import com.jackg.programmers.challenges.imagememo.data.MemoEntity;
 import com.jackg.programmers.challenges.imagememo.rvutil.CustomAdapter;
+import com.jackg.programmers.challenges.imagememo.util.CheckableIV;
 import com.jackg.programmers.challenges.imagememo.util.IvLongClickListener;
 
 import java.util.List;
@@ -74,7 +75,7 @@ public class BindingAdapter {
 
                 group.addView(iv);
 
-                Glide.with(iv.getContext()).load(url).into(iv);
+                Glide.with(iv.getContext()).load(url).error(R.mipmap.ic_launcher).into(iv);
             }
 
             if (group.getMeasuredHeight() > (30 * dp10)) {
@@ -99,7 +100,7 @@ public class BindingAdapter {
 
         if (imgList.size() > 0) {
             for (String url : imgList) {
-                ImageView iv = new ImageView(layout.getContext());
+                CheckableIV iv = new CheckableIV(layout.getContext());
 
                 LinearLayout.LayoutParams params =
                         new LinearLayout.LayoutParams(dp10 * 6, dp10 * 6);
@@ -111,7 +112,7 @@ public class BindingAdapter {
 
                 layout.addView(iv);
 
-                Glide.with(iv.getContext()).load(url).circleCrop().into(iv);
+                Glide.with(iv.getContext()).load(url).circleCrop().error(R.mipmap.ic_launcher).into(iv);
             }
         }
     }

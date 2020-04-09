@@ -40,7 +40,7 @@ public class MemoRepo {
         });
 
         try {
-            return  future.get();
+            return future.get();
         } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
